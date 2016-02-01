@@ -5,7 +5,7 @@
 
 	var data = { url: 'https://github.com/marcelonaegeler/template-engine', name: 'Github' };
 	
-	containerCompiled.appendChild( templateEngine( template, data ) ); // As HTML Element
+	containerCompiled.appendChild( templateEngine( template, {} ) ); // As HTML Element
 
 	containerText.innerText = templateEngine( template, data, true ); // As text string
 	

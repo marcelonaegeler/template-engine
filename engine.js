@@ -7,9 +7,15 @@ var templateEngine = function( template, dataObject, returnAsString ) {
 		, match
 		, result;
 
+	var keys = Object.keys( dataObject ).join( '|' );
+
 	var add = function( line, js ) {
 		if ( js ) {
-			code += ( line.match( statements ) ? line + '\n' : 'r.push(' + line + ');\n' );
+			if ( line.match( statements ) ) {
+				code += line + '\n';
+			} else {
+				code += 'if ( obj[ \''+ line.trim() +'\' ] ) { r.push(' + line + '); }\n';
+			}
 		} else {
 			/*
 			* There's a workaround to make it work (.replace( / {2}/g ))
