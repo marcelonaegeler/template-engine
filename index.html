@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS Template Engine</title>
+</head>
+<body>
+	<h1>JS Template Engine</h1>
+
+	<h3>Compiled template as HTML:</h3>
+	<div id="container-compiled"></div>
+
+	<h3>Compiled template as text string:</h3>
+	<div id="container-text"></div>
+
+	<!--
+	Script's type property needs to be something the browser can't understand
+	-->
+	<script type="js-template" id="tpl-demo">
+		<div class="demo">
+			<h4>Welcome to the demo!</h4>
+			<% if ( typeof url !== 'undefined' && typeof name !== 'undefined' ) { %>
+				<a href="<% url %>"><% name %></a>
+			<% } else { %>
+				No Github to show :(
+			<% } %>
+		</div>
+	</script>
+
+	<script src="engine.js"></script>
+	<script src="index.js"></script>
+</body>
+</html>

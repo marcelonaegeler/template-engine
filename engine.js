@@ -1,4 +1,4 @@
-var templateEngine = function( tmpl, data, returnString ) {
+var templateEngine = function( template, dataObject, returnAsString ) {
 
 	var tags = /<%(.+?)%>/g
 		, statements = /(^( )?(var|if|for|else|switch|case|break|{|}|;))(.*)?/g
@@ -19,20 +19,23 @@ var templateEngine = function( tmpl, data, returnString ) {
 		}
 		return add;
 	}
-	while ( match = tags.exec( tmpl ) ) {
-		add( tmpl.slice( cursor, match.index ) )( match[1], true );
+	while ( match = tags.exec( template ) ) {
+		add( template.slice( cursor, match.index ) )( match[1], true );
 		cursor = match.index + match[0].length;
 	}
-	add( tmpl.substr( cursor, tmpl.length - cursor ) );
+	add( template.substr( cursor, template.length - cursor ) );
 	code = ( code + 'return r.join( "" ); }' ).replace( /[\r\t\n]/g, '' );
 
 	try {
-		result = new Function( 'obj', code ).apply( data, [ data ] );
+		if ( !dataObject ) {
+			dataObject = {};
+		}
+		result = new Function( 'obj', code ).apply( dataObject, [ dataObject ] );
 	} catch ( err ) {
 		console.error( "'" + err.message + "'", " in \n\nCode:\n", code, "\n" );
 	}
 
-	if ( !returnString ) {
+	if ( !returnAsString ) {
 		var d = document.createElement( 'div' );
 		d.innerHTML = result;
 		
