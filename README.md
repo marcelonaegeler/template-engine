@@ -1,5 +1,5 @@
 # template-engine
-A JS template engine from https://github.com/krasimir/absurd
+A JS template engine based on https://github.com/krasimir/absurd
 
 ## Usage
 templateEngine( template, dataObject [, returnAsString ] );
