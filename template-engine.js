@@ -1,7 +1,7 @@
 var templateEngine = function( template, dataObject, returnAsString ) {
 
 	var tags = /<%(.+?)%>/g
-		, statements = /(^( )?(var|if|for|else|switch|case|break|{|}|;))(.*)?/g
+		, statements = /(^( )?(var|if|for|while|else|switch|case|break|{|}|;))(.*)?/g
 		, code = 'with ( obj ) { var r=[];\n'
 		, cursor = 0
 		, match
